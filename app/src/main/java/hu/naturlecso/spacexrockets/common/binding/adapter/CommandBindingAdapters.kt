@@ -1,0 +1,25 @@
+package hu.naturlecso.spacexrockets.common.binding.adapter
+
+import android.view.View
+import androidx.databinding.BindingAdapter
+import hu.naturlecso.spacexrockets.common.binding.Command
+
+@BindingAdapter("command")
+fun View.bindEmptyCommandToView(command: Command?) {
+    bindCommandToView(this, command)
+}
+
+@BindingAdapter(value = ["command", "item"])
+fun <T> View.bindRelayCommandToView(commandWithParam: ((T) -> Command)?, param: T) {
+    bindCommandToView(this, commandWithParam?.invoke(param))
+}
+
+private fun bindCommandToView(view: View, command: Command?) {
+    if (command != null) {
+        view.isEnabled = command.canExecute()
+        view.setOnClickListener { command.execute() }
+    } else {
+        view.isEnabled = false
+        view.setOnClickListener(null)
+    }
+}

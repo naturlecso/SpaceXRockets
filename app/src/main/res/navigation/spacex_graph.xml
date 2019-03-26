@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/spacex_graph"
+    app:startDestination="@id/rocketsFragment">
+
+    <fragment
+        android:id="@+id/rocketsFragment"
+        android:name="hu.naturlecso.spacexrockets.ui.rockets.RocketsFragment"
+        android:label="RocketsFragment">
+        <action
+            android:id="@+id/navigate_toLaunches"
+            app:destination="@id/launchesFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/launchesFragment"
+        android:name="hu.naturlecso.spacexrockets.ui.launches.LaunchesFragment"
+        android:label="LaunchesFragment"/>
+</navigation>
