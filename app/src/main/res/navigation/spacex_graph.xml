@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/rocketsFragment"
         android:name="hu.naturlecso.spacexrockets.ui.rockets.RocketsFragment"
-        android:label="RocketsFragment">
+        android:label="@string/rockets_label">
         <action
             android:id="@+id/navigate_toLaunches"
             app:destination="@id/launchesFragment"/>

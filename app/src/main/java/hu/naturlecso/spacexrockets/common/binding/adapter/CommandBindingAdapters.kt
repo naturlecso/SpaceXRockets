@@ -5,12 +5,12 @@ import androidx.databinding.BindingAdapter
 import hu.naturlecso.spacexrockets.common.binding.Command
 
 @BindingAdapter("command")
-fun View.bindEmptyCommandToView(command: Command?) {
+fun View.bindCommand(command: Command?) {
     bindCommandToView(this, command)
 }
 
 @BindingAdapter(value = ["command", "item"])
-fun <T> View.bindRelayCommandToView(commandWithParam: ((T) -> Command)?, param: T) {
+fun <T> View.bindCommandWithParam(commandWithParam: ((T) -> Command)?, param: T) {
     bindCommandToView(this, commandWithParam?.invoke(param))
 }
 

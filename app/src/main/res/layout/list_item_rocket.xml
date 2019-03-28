@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="hu.naturlecso.spacexrockets.ui.rockets.RocketListItemViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_normal">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="@dimen/margin_none"
+            android:layout_height="wrap_content"
+            android:text="@{vm.rocket.name}"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Falcon 9"/>
+
+        <TextView
+            android:id="@+id/country_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rockets_country_title"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.rocket.country}"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_marginStart="@dimen/margin_small"
+            app:layout_constraintStart_toEndOf="@+id/country_title"
+            app:layout_constraintBaseline_toBaselineOf="@+id/country_title"
+            tools:text="Estonia"/>
+
+        <TextView
+            android:id="@+id/engines_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rockets_engine_count_title"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            app:layout_constraintTop_toBottomOf="@+id/country_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/engines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.rocket.engineCount}"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_marginStart="@dimen/margin_small"
+            app:layout_constraintStart_toEndOf="@+id/engines_title"
+            app:layout_constraintBaseline_toBaselineOf="@+id/engines_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="42"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -3,7 +3,6 @@ package hu.naturlecso.spacexrockets.common.binding.adapter
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hu.naturlecso.spacexrockets.common.binding.Command
-import hu.naturlecso.spacexrockets.common.binding.RelayCommand
 import hu.naturlecso.spacexrockets.common.view.ItemActionProvider
 import hu.naturlecso.spacexrockets.common.view.BindableRecyclerViewAdapter
 
@@ -21,20 +20,16 @@ fun <T> RecyclerView.bindItems(items: List<T>?) {
 }
 
 @BindingAdapter("itemClicked")
-fun <T> RecyclerView.bindItemClickedCommandToRecyclerView(commandWithParam: ((T) -> Command)?) {
-    if (adapter is ItemActionProvider<*>) {
+fun <T> RecyclerView.bindItemClickedCommand(commandWithParam: ((T) -> Command)?) {
+    if (adapter != null && adapter is ItemActionProvider<*>) {
         val actionProvider = adapter as ItemActionProvider<T>
 
-        if (commandWithParam != null) {
-            actionProvider.setOnItemClickedListener(commandWithParam?.run {
-                object : ItemActionProvider.OnItemClickedListener<T> {
-                    override fun onItemClicked(item: T) {
-                        invoke(item)
-                    }
+        actionProvider.setOnItemClickedListener(commandWithParam?.run {
+            object : ItemActionProvider.OnItemClickedListener<T> {
+                override fun onItemClicked(item: T) {
+                    invoke(item).execute()
                 }
-            })
-        } else {
-            actionProvider.setOnItemClickedListener(null)
-        }
+            }
+        })
     }
 }

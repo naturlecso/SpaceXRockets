@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SpaceX Rockets</string>
+
     <string name="welcome_start_button">Get Started</string>
     <string name="welcome_title">SpaceX Rockets</string>
     <string name="welcome_description">SpaceX is a private American aerospace manufacturer and space transportation services company headquartered in Hawthorne, California.\nThis application displays the rockets of SpaceX and its launches.\n\nTo refresh swipe down on the rocket list.</string>
+
+    <string name="rockets_label">Rockets</string>
+    <string name="rockets_country_title">Country:</string>
+    <string name="rockets_engine_count_title">Engine count:</string>
 </resources>
