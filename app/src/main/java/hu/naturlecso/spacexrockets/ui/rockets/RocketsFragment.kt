@@ -15,11 +15,17 @@ class RocketsFragment : Fragment() {
     private val viewModel: RocketsViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: hu.naturlecso.spacexrockets.databinding.FragmentRocketsBinding = DataBindingUtil.inflate(
+        val binding: FragmentRocketsBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_rockets, container, false)
 
         binding.vm = viewModel
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.navigateToWelcomeCommand.execute()
     }
 }

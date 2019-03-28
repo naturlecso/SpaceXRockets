@@ -12,10 +12,18 @@
         <action
             android:id="@+id/navigate_toLaunches"
             app:destination="@id/launchesFragment"/>
+        <action
+            android:id="@+id/action_showWelcomeDialog"
+            app:destination="@id/welcomeFragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/launchesFragment"
         android:name="hu.naturlecso.spacexrockets.ui.launches.LaunchesFragment"
         android:label="LaunchesFragment"/>
+
+    <dialog-fragment
+        android:id="@+id/welcomeFragment"
+        android:name="hu.naturlecso.spacexrockets.ui.welcome.WelcomeFragment"
+        android:label="WelcomeFragment"/>
 </navigation>

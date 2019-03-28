@@ -3,25 +3,20 @@ package hu.naturlecso.spacexrockets.common.binding.adapter
 import android.view.View
 import androidx.databinding.BindingAdapter
 
-@BindingAdapter("android:visibility")
-fun View.bindVisibility(visible: Boolean) {
-    visibility = decideVisibility(visible)
+@BindingAdapter(value = ["android:visibility", "invisibleType"], requireAll = false)
+fun View.bindVisibility(visible: Boolean, invisibleType: Int?) {
+    visibility = decideVisibility(visible, invisibleType)
 }
 
-@BindingAdapter("android:visibility")
-fun View.bindVisibility(any: Any?) {
-    visibility = decideVisibility(any != null)
+@BindingAdapter(value = ["android:visibility", "invisibleType"], requireAll = false)
+fun <T> View.bindVisibility(list: List<T>, invisibleType: Int?) {
+    visibility = decideVisibility(!list.isNullOrEmpty(), invisibleType)
 }
 
-@BindingAdapter("android:visibility")
-fun <T> View.bindVisibility(list: List<T>) {
-    visibility = decideVisibility(!list.isNullOrEmpty())
-}
-
-private fun decideVisibility(visible: Boolean): Int {
+private fun decideVisibility(visible: Boolean, invisibleType: Int?): Int {
     return if (visible) {
         View.VISIBLE
     } else {
-        View.GONE
+        invisibleType ?: View.GONE
     }
 }
