@@ -4,10 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import hu.naturlecso.spacexrockets.R
 import hu.naturlecso.spacexrockets.databinding.FragmentLaunchesBinding
+import kotlinx.android.synthetic.main.fragment_launches.chart
+import kotlinx.android.synthetic.main.fragment_launches.launchList
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LaunchesFragment : Fragment() {
@@ -21,5 +26,25 @@ class LaunchesFragment : Fragment() {
         binding.vm = viewModel
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        launchList.apply {
+            adapter = LaunchAdapter()
+            isNestedScrollingEnabled = false
+            layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
+        }
+
+        chart.apply {
+            xAxis.granularity = 1f
+            axisLeft.granularity = 1f
+            axisRight.isEnabled = false
+            setNoDataTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
+            legend.isEnabled = false
+            description.isEnabled = false
+        }
     }
 }

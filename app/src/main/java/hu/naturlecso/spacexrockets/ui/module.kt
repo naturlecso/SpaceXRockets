@@ -8,6 +8,6 @@ import org.koin.dsl.module
 
 val uiModule = module {
     viewModel { RocketsViewModel(get(), get(), get(), get()) }
-    viewModel { LaunchesViewModel() }
+    viewModel { LaunchesViewModel(get(), get()) }
     viewModel { WelcomeViewModel(get(), get()) }
 }

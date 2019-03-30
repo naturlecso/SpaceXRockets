@@ -7,7 +7,8 @@ import hu.naturlecso.spacexrockets.domain.Launch
 import hu.naturlecso.spacexrockets.domain.LaunchStore
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
-import org.threeten.bp.LocalDate
+import org.threeten.bp.Instant
+import org.threeten.bp.ZoneId
 
 class DefaultLaunchStore(
     private val launchDao: LaunchDao,
@@ -22,7 +23,7 @@ class DefaultLaunchStore(
     private fun mapDataModelToDomainModel(dataModel: LaunchDataModel): Launch = dataModel.let {
         Launch(
             missionName = it.missionName,
-            date = LocalDate.ofEpochDay(it.date),
+            date = Instant.ofEpochSecond(it.date).atZone(ZoneId.systemDefault()).toLocalDate(),
             year = it.year,
             successful = it.successful,
             missionPatchUrl = it.missionPatchUrl

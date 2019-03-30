@@ -1,10 +1,20 @@
 package hu.naturlecso.spacexrockets.common.binding.adapter
 
 import androidx.databinding.BindingAdapter
+import androidx.databinding.BindingMethod
+import androidx.databinding.BindingMethods
 import androidx.recyclerview.widget.RecyclerView
 import hu.naturlecso.spacexrockets.common.binding.Command
 import hu.naturlecso.spacexrockets.common.view.ItemActionProvider
 import hu.naturlecso.spacexrockets.common.view.BindableRecyclerViewAdapter
+
+@BindingMethods(
+        BindingMethod(
+                type = RecyclerView::class,
+                attribute = "hasFixedSize",
+                method = "setHasFixedSize")
+)
+class RecyclerViewBindingMethods
 
 @BindingAdapter("items")
 fun <T> RecyclerView.bindItems(items: List<T>?) {

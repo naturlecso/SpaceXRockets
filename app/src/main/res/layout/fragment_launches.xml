@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -7,15 +10,116 @@
                 type="hu.naturlecso.spacexrockets.ui.launches.LaunchesViewModel"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/margin_normal">
+
+            <TextView
+                android:id="@+id/graph_title"
+                android:layout_width="@dimen/margin_none"
+                android:layout_height="wrap_content"
+                android:text="@string/launches_graph_title"
+                android:textAppearance="?android:textAppearance"
+                android:textStyle="bold"
+                android:paddingBottom="@dimen/margin_normal"
+                android:visibility="@{!vm.noLaunces}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guide_start"
+                app:layout_constraintEnd_toEndOf="@+id/guide_end"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart"
+                android:layout_width="@dimen/margin_none"
+                android:layout_height="@dimen/launches_chart_height"
+                android:paddingBottom="@dimen/margin_normal"
+                android:visibility="@{!vm.noLaunces}"
+                app:layout_constraintEnd_toEndOf="@+id/guide_end"
+                app:layout_constraintStart_toStartOf="@+id/guide_start"
+                app:layout_constraintTop_toBottomOf="@+id/graph_title"
+                bind:entries="@{vm.chartEntries}"/>
+
+            <TextView
+                android:id="@+id/description_title"
+                android:layout_width="@dimen/margin_none"
+                android:layout_height="wrap_content"
+                android:text="@string/launches_description_title"
+                android:textAppearance="?android:textAppearance"
+                android:textStyle="bold"
+                android:paddingBottom="@dimen/margin_normal"
+                app:layout_constraintTop_toBottomOf="@+id/chart"
+                app:layout_constraintStart_toStartOf="@+id/guide_start"
+                app:layout_constraintEnd_toEndOf="@+id/guide_end"/>
+            
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="@dimen/margin_none"
+                android:layout_height="wrap_content"
+                android:text="@{vm.selectedRocket.description}"
+                android:textAppearance="?android:attr/textAppearance"
+                android:paddingBottom="@dimen/margin_normal"
+                app:layout_constraintTop_toBottomOf="@+id/description_title"
+                app:layout_constraintStart_toStartOf="@+id/guide_start"
+                app:layout_constraintEnd_toEndOf="@+id/guide_end"
+                tools:text="Rocket description!"/>
+
+            <TextView
+                android:id="@+id/list_title"
+                android:layout_width="@dimen/margin_none"
+                android:layout_height="wrap_content"
+                android:text="@string/launches_list_title"
+                android:textAppearance="?android:textAppearance"
+                android:textStyle="bold"
+                android:paddingBottom="@dimen/margin_normal"
+                android:visibility="@{!vm.noLaunces}"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:layout_constraintStart_toStartOf="@+id/guide_start"
+                app:layout_constraintEnd_toEndOf="@+id/guide_end"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/launchList"
+                android:layout_width="@dimen/margin_none"
+                android:layout_height="wrap_content"
+                android:visibility="@{!vm.noLaunces}"
+                app:layout_constraintTop_toBottomOf="@+id/list_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                bind:hasFixedSize="@{false}"
+                bind:items="@{vm.launchListItems}"/>
+
+            <TextView
+                android:id="@+id/empty"
+                android:layout_width="@dimen/margin_none"
+                android:layout_height="wrap_content"
+                android:text="@string/launches_empty"
+                android:textAppearance="?android:textAppearance"
+                android:textColor="@color/negative"
+                android:gravity="center_horizontal"
+                android:visibility="@{vm.noLaunces}"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:layout_constraintStart_toStartOf="@+id/guide_start"
+                app:layout_constraintEnd_toEndOf="@+id/guide_end"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Launches"/>
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/margin_normal"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/margin_normal"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

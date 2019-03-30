@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/launchesFragment"
         android:name="hu.naturlecso.spacexrockets.ui.launches.LaunchesFragment"
-        android:label="LaunchesFragment"/>
+        android:label="@string/launches_label"/>
 
     <dialog-fragment
         android:id="@+id/welcomeFragment"

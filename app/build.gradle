@@ -87,4 +87,5 @@ dependencies {
     implementation "com.jakewharton.timber:timber:4.7.1"
     implementation "com.jakewharton.threetenabp:threetenabp:1.2.0"
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

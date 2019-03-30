@@ -9,4 +9,12 @@
     <string name="rockets_label">Rockets</string>
     <string name="rockets_country_title">Country:</string>
     <string name="rockets_engine_count_title">Engine count:</string>
+
+    <string name="launches_label">Launches</string>
+    <string name="launches_graph_title">Launches per year</string>
+    <string name="launches_description_title">Rocket description</string>
+    <string name="launches_list_title">Launches</string>
+    <string name="launches_successful">Successful</string>
+    <string name="launches_unsuccessful">Unsuccessful</string>
+    <string name="launches_empty">No launches yet!</string>
 </resources>
