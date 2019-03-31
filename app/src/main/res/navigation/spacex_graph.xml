@@ -11,10 +11,18 @@
         android:label="@string/rockets_label">
         <action
             android:id="@+id/navigate_toLaunches"
-            app:destination="@id/launchesFragment"/>
+            app:destination="@id/launchesFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_showWelcomeDialog"
-            app:destination="@id/welcomeFragment"/>
+            app:destination="@id/welcomeFragment"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"/>
     </fragment>
 
     <fragment

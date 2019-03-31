@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -33,7 +34,9 @@ class RocketsFragment : Fragment() {
             adapter = RocketAdapter()
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
+            addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL).apply {
+                setDrawable(ContextCompat.getDrawable(context, R.drawable.divider_list)!!)
+            })
         }
 
         viewModel.navigateToWelcomeCommand.execute()

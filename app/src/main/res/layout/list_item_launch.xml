@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="@dimen/margin_none"
+            android:layout_width="@dimen/none"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_normal"
             android:text="@{vm.launch.missionName}"
@@ -47,7 +47,7 @@
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="@dimen/margin_none"
+            android:layout_width="@dimen/none"
             android:layout_height="wrap_content"
             android:text="@{vm.launch.date}"
             android:textAppearance="?android:textAppearance"
@@ -61,7 +61,7 @@
 
         <TextView
             android:id="@+id/successful"
-            android:layout_width="@dimen/margin_none"
+            android:layout_width="@dimen/none"
             android:layout_height="wrap_content"
             android:text="@{vm.launch.successful ? @string/launches_successful : @string/launches_unsuccessful}"
             android:textAppearance="?android:textAppearance"

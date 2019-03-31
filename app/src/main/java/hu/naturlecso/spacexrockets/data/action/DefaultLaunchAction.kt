@@ -7,6 +7,7 @@ import hu.naturlecso.spacexrockets.data.database.LaunchDataModel
 import hu.naturlecso.spacexrockets.domain.LaunchAction
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 class DefaultLaunchAction(
     private val spacexApiService: SpacexApiService,
@@ -16,6 +17,8 @@ class DefaultLaunchAction(
     override fun refresh(): Completable = spacexApiService.allLaunches()
         .map { apiModelList -> apiModelList.map { mapApiModelToDataModel(it) } }
         .flatMapCompletable { Completable.fromAction {launchDao.replaceAll(it) } }
+        .doOnError { Timber.e(it) }
+        .onErrorComplete()
         .subscribeOn(Schedulers.io())
 
     private fun mapApiModelToDataModel(apiModel: LaunchApiModel): LaunchDataModel = apiModel.let {

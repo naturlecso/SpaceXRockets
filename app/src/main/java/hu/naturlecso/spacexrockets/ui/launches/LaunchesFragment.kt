@@ -35,7 +35,9 @@ class LaunchesFragment : Fragment() {
             adapter = LaunchAdapter()
             isNestedScrollingEnabled = false
             layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
+            addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL).apply {
+                setDrawable(ContextCompat.getDrawable(context, R.drawable.divider_list)!!)
+            })
         }
 
         chart.apply {

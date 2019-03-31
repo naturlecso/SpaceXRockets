@@ -35,7 +35,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@{vm.inactiveRocketsFiltered ? @android:drawable/btn_star_big_on : @android:drawable/btn_star_big_off}"
+            android:src="@{vm.inactiveRocketsFiltered ? @drawable/ic_filter_on : @drawable/ic_filter_off}"
             android:layout_margin="@dimen/margin_normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

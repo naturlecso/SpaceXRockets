@@ -21,7 +21,7 @@
 
             <TextView
                 android:id="@+id/graph_title"
-                android:layout_width="@dimen/margin_none"
+                android:layout_width="@dimen/none"
                 android:layout_height="wrap_content"
                 android:text="@string/launches_graph_title"
                 android:textAppearance="?android:textAppearance"
@@ -34,7 +34,7 @@
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chart"
-                android:layout_width="@dimen/margin_none"
+                android:layout_width="@dimen/none"
                 android:layout_height="@dimen/launches_chart_height"
                 android:paddingBottom="@dimen/margin_normal"
                 android:visibility="@{!vm.noLaunces}"
@@ -45,7 +45,7 @@
 
             <TextView
                 android:id="@+id/description_title"
-                android:layout_width="@dimen/margin_none"
+                android:layout_width="@dimen/none"
                 android:layout_height="wrap_content"
                 android:text="@string/launches_description_title"
                 android:textAppearance="?android:textAppearance"
@@ -57,7 +57,7 @@
             
             <TextView
                 android:id="@+id/description"
-                android:layout_width="@dimen/margin_none"
+                android:layout_width="@dimen/none"
                 android:layout_height="wrap_content"
                 android:text="@{vm.selectedRocket.description}"
                 android:textAppearance="?android:attr/textAppearance"
@@ -69,7 +69,7 @@
 
             <TextView
                 android:id="@+id/list_title"
-                android:layout_width="@dimen/margin_none"
+                android:layout_width="@dimen/none"
                 android:layout_height="wrap_content"
                 android:text="@string/launches_list_title"
                 android:textAppearance="?android:textAppearance"
@@ -82,7 +82,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/launchList"
-                android:layout_width="@dimen/margin_none"
+                android:layout_width="@dimen/none"
                 android:layout_height="wrap_content"
                 android:visibility="@{!vm.noLaunces}"
                 app:layout_constraintTop_toBottomOf="@+id/list_title"
@@ -93,7 +93,7 @@
 
             <TextView
                 android:id="@+id/empty"
-                android:layout_width="@dimen/margin_none"
+                android:layout_width="@dimen/none"
                 android:layout_height="wrap_content"
                 android:text="@string/launches_empty"
                 android:textAppearance="?android:textAppearance"
