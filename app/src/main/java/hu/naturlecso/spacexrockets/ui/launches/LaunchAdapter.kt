@@ -10,26 +10,29 @@ import hu.naturlecso.spacexrockets.R
 import hu.naturlecso.spacexrockets.common.view.BindableRecyclerViewAdapter
 
 class LaunchAdapter : BindableRecyclerViewAdapter<LaunchListItem>() {
-    private val VIEW_TYPE_HEADER: Int = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
-        val binding: ViewDataBinding = if (viewType == VIEW_TYPE_HEADER) {
-            DataBindingUtil.inflate(inflater, R.layout.list_item_launch_header, parent, false)
-        } else {
-            DataBindingUtil.inflate(inflater, R.layout.list_item_launch, parent, false)
+        val layout = when(viewType) {
+            VIEW_TYPE_LAUNCH -> R.layout.list_item_launch
+            VIEW_TYPE_YEAR -> R.layout.list_item_launch_year
+            VIEW_TYPE_CHART -> R.layout.list_item_launch_chart
+            VIEW_TYPE_ROCKET_DESCRIPTION -> R.layout.list_item_launch_rocket_description
+            else -> 0
         }
+
+        val binding: ViewDataBinding = DataBindingUtil.inflate(inflater, layout, parent, false)
 
         return ViewHolder(binding)
     }
 
-    override fun getItemViewModel(item: LaunchListItem): ViewModel =
-        if (item is LaunchListItemHeader) {
-            LaunchListItemHeaderViewModel(item.year)
-        } else {
-            LaunchListItemModelViewModel((item as LaunchListItemModel).launch)
-        }
+    override fun getItemViewModel(item: LaunchListItem): ViewModel = when (item) {
+        is LaunchListItem.LaunchItem -> LaunchListItemLaunchViewModel(item.launch)
+        is LaunchListItem.Year -> LaunchListItemYearViewModel(item.year)
+        is LaunchListItem.Chart -> LaunchListItemChartViewModel(item.launches)
+        is LaunchListItem.RocketDescription -> LaunchListItemRocketDescriptionViewModel(item.rocket)
+    }
 
     override val diffCallback: DiffUtil.ItemCallback<LaunchListItem> = object : DiffUtil.ItemCallback<LaunchListItem>() {
         override fun areContentsTheSame(oldItem: LaunchListItem, newItem: LaunchListItem): Boolean =
@@ -39,11 +42,17 @@ class LaunchAdapter : BindableRecyclerViewAdapter<LaunchListItem>() {
                 oldItem == newItem
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (getItem(position) is LaunchListItemHeader) {
-            VIEW_TYPE_HEADER
-        } else {
-            super.getItemViewType(position)
-        }
+    override fun getItemViewType(position: Int): Int = when(getItem(position)) {
+        is LaunchListItem.LaunchItem -> VIEW_TYPE_LAUNCH
+        is LaunchListItem.Year -> VIEW_TYPE_YEAR
+        is LaunchListItem.Chart -> VIEW_TYPE_CHART
+        is LaunchListItem.RocketDescription -> VIEW_TYPE_ROCKET_DESCRIPTION
+    }
+
+    companion object {
+        private const val VIEW_TYPE_LAUNCH = 4
+        private const val VIEW_TYPE_YEAR = 1
+        private const val VIEW_TYPE_CHART = 2
+        private const val VIEW_TYPE_ROCKET_DESCRIPTION = 3
     }
 }

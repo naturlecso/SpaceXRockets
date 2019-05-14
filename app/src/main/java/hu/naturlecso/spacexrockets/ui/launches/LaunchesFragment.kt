@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import hu.naturlecso.spacexrockets.R
 import hu.naturlecso.spacexrockets.databinding.FragmentLaunchesBinding
-import kotlinx.android.synthetic.main.fragment_launches.chart
 import kotlinx.android.synthetic.main.fragment_launches.launchList
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,20 +32,10 @@ class LaunchesFragment : Fragment() {
 
         launchList.apply {
             adapter = LaunchAdapter()
-            isNestedScrollingEnabled = false
             layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL).apply {
                 setDrawable(ContextCompat.getDrawable(context, R.drawable.divider_list)!!)
             })
-        }
-
-        chart.apply {
-            xAxis.granularity = 1f
-            axisLeft.granularity = 1f
-            axisRight.isEnabled = false
-            setNoDataTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
-            legend.isEnabled = false
-            description.isEnabled = false
         }
     }
 }

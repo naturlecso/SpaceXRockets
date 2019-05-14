@@ -14,14 +14,21 @@ fun LineChart.bindEntries(entries: Map<Int, Int>?) {
         return
     }
 
-    val lineColor = ContextCompat.getColor(context, R.color.colorPrimary)
+    val baseColor = ContextCompat.getColor(context, R.color.colorPrimary)
+
+    xAxis.granularity = 1f
+    axisLeft.granularity = 1f
+    axisRight.isEnabled = false
+    setNoDataTextColor(baseColor)
+    legend.isEnabled = false
+    description.isEnabled = false
 
     entries.map { Entry(it.key.toFloat(), it.value.toFloat()) }
             .let { LineDataSet(it, "").apply {
                 lineWidth = 3f
                 valueTextSize = 10f
-                color = lineColor
-                setCircleColor(lineColor)
+                color = baseColor
+                setCircleColor(baseColor)
                 setDrawCircleHole(true)
             } }
             .let { LineData(it) }

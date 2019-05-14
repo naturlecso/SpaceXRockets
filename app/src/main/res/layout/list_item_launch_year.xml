@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="hu.naturlecso.spacexrockets.ui.launches.LaunchListItemHeaderViewModel"/>
+            type="hu.naturlecso.spacexrockets.ui.launches.LaunchListItemYearViewModel"/>
     </data>
 
     <TextView

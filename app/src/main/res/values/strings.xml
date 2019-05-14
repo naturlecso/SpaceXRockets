@@ -16,5 +16,4 @@
     <string name="launches_list_title">Launches</string>
     <string name="launches_successful">Successful</string>
     <string name="launches_unsuccessful">Unsuccessful</string>
-    <string name="launches_empty">No launches yet!</string>
 </resources>
