@@ -12,9 +12,5 @@ fun TextView.bindIntegerAsText(int: Int) {
 
 @BindingAdapter("android:text")
 fun TextView.bindDateAsText(date: LocalDate?) {
-    if (date == null) {
-        return
-    }
-
-    text = date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy."))
+    date?.let { text = it.format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")) }
 }

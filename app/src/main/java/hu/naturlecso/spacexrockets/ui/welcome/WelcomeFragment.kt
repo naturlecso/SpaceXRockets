@@ -1,6 +1,7 @@
 package hu.naturlecso.spacexrockets.ui.welcome
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +39,6 @@ class WelcomeFragment: DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return Dialog(activity, R.style.DialogTheme)
+        return Dialog(activity as Context, R.style.DialogTheme)
     }
 }

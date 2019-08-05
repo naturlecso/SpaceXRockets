@@ -26,9 +26,7 @@ abstract class BindableRecyclerViewAdapter<T> :
         val item = getItem(position)
 
         holder.itemView.setOnClickListener {
-            if (itemClickedListener != null) {
-                itemClickedListener!!.onItemClicked(item)
-            }
+            itemClickedListener?.onItemClicked(item)
         }
 
         val binding = holder.binding

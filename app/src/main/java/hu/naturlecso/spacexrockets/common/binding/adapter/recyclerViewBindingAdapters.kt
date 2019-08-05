@@ -16,19 +16,18 @@ import hu.naturlecso.spacexrockets.common.view.BindableRecyclerViewAdapter
 )
 class RecyclerViewBindingMethods
 
+@Suppress("Unchecked_cast")
 @BindingAdapter("items")
 fun <T> RecyclerView.bindItems(items: List<T>?) {
-    if (adapter == null) {
-        return
-    }
-
-    if (items == null) return
+    adapter ?: return
+    items ?: return
 
     if (adapter is BindableRecyclerViewAdapter<*>) {
         (adapter as BindableRecyclerViewAdapter<T>).swapItems(items)
     }
 }
 
+@Suppress("Unchecked_cast")
 @BindingAdapter("itemClicked")
 fun <T> RecyclerView.bindItemClickedCommand(commandWithParam: ((T) -> Command)?) {
     if (adapter != null && adapter is ItemActionProvider<*>) {

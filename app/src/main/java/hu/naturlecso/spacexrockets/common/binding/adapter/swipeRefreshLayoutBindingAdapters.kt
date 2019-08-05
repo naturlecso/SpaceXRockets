@@ -16,8 +16,5 @@ class SwipeAdapterBindingMethods
 
 @BindingAdapter("refreshCommand")
 fun SwipeRefreshLayout.bindRefreshListener(command: Command?) {
-
-    if (command != null) {
-        setOnRefreshListener { command.execute() }
-    }
+    command?.let { setOnRefreshListener { it.execute() } }
 }

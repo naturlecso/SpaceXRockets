@@ -3,8 +3,9 @@ package hu.naturlecso.spacexrockets.common.binding
 import androidx.databinding.BaseObservable
 import timber.log.Timber
 
-class RelayCommand(private val executable: () -> Unit,
-                      private val canExecute: () -> Boolean = { true }
+class RelayCommand(
+    private val executable: () -> Unit,
+    private val canExecute: () -> Boolean = { true }
 ): BaseObservable(), Command {
 
     override fun execute() = executable.invoke()

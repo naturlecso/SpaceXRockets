@@ -1,5 +1,6 @@
 package hu.naturlecso.spacexrockets.common.navigation
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
@@ -9,9 +10,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
-import androidx.navigation.fragment.FragmentNavigator
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.plusAssign
 import hu.naturlecso.spacexrockets.R
 import java.util.ArrayDeque
 import java.util.Deque
@@ -60,7 +58,7 @@ class DialogFragmentNavigator(
             navOptions: NavOptions?,
             navigatorExtras: Extras?
     ): NavDestination? {
-        val lastDialogFragment = instantiateFragment(destination.className!!, args)
+        val lastDialogFragment = instantiateFragment(requireNotNull(destination.className), args)
         val tr = fragmentManager.beginTransaction().addToBackStack(FRAGMENT_BACKSTACK_NAME)
 
         lastDialogFragment.show(tr, destination.id.toString())
@@ -75,7 +73,7 @@ class DialogFragmentNavigator(
     private fun instantiateFragment(className: String, args: Bundle?): DialogFragment {
         val clazz = Class.forName(className)
         return fragmentManager.fragmentFactory
-                .instantiate(clazz.classLoader!!, className, args) as DialogFragment
+                .instantiate(requireNotNull(clazz.classLoader), className, args) as DialogFragment
     }
 
     override fun createDestination(): Destination = Destination(this)
@@ -122,6 +120,7 @@ class DialogFragmentNavigator(
         var className: String? = null
             get() = checkNotNull(field) { "Dialog name was not set" }
 
+        @SuppressLint("Recycle")
         override fun onInflate(context: Context, attrs: AttributeSet) {
             super.onInflate(context, attrs)
             context.resources.obtainAttributes(attrs, R.styleable.DialogFragmentNavigator).use {
@@ -157,16 +156,5 @@ class DialogFragmentNavigator(
             }
         }
         return true
-    }
-}
-
-/**
- * A [NavHostFragment] who supports navigation to [DialogFragment]s.
- */
-class CustomNavHostFragment : NavHostFragment() {
-
-    override fun createFragmentNavigator(): androidx.navigation.Navigator<out FragmentNavigator.Destination> {
-        navController.navigatorProvider += DialogFragmentNavigator(childFragmentManager)
-        return super.createFragmentNavigator()
     }
 }

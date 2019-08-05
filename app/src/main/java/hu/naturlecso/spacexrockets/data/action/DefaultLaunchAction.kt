@@ -24,12 +24,12 @@ class DefaultLaunchAction(
     private fun mapApiModelToDataModel(apiModel: LaunchApiModel): LaunchDataModel = apiModel.let {
         LaunchDataModel(
             id = it.flightNumber,
-            missionName = it.missionName!!,
+            missionName = it.missionName,
             date = it.launchDate,
             year = it.launchYear,
             successful = it.launchSuccess,
             missionPatchUrl = it.links.missionPatch,
-            rocketId = it.rocket.rocketId!!
+            rocketId = it.rocket.rocketId
         )
     }
 }
