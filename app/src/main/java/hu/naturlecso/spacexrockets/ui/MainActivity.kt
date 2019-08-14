@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import hu.naturlecso.spacexrockets.R
+import hu.naturlecso.spacexrockets.common.navigation.NavigationCommand
 import hu.naturlecso.spacexrockets.common.navigation.Navigator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -32,7 +33,13 @@ class MainActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                navController.navigate(it)
+                when (it) {
+                    is NavigationCommand.To -> navController.navigate(it.directions)
+                    is NavigationCommand.BackTo -> navController.popBackStack(it.destinationId, false)
+                    is NavigationCommand.Back -> navController.navigateUp()
+                    is NavigationCommand.ToRoot -> navController.popBackStack(
+                        navController.graph.startDestination, false)
+                }
             }
     }
 

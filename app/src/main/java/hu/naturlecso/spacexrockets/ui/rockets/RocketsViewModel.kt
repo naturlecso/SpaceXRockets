@@ -4,6 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import hu.naturlecso.spacexrockets.common.binding.RxObservableField
 import hu.naturlecso.spacexrockets.common.binding.command
+import hu.naturlecso.spacexrockets.common.navigation.NavigationCommand.To
 import hu.naturlecso.spacexrockets.common.navigation.Navigator
 import hu.naturlecso.spacexrockets.domain.LaunchAction
 import hu.naturlecso.spacexrockets.domain.Rocket
@@ -45,12 +46,12 @@ class RocketsViewModel(
             .firstElement()
             .map { it.isEmpty() }
             .filter { it }
-            .subscribe { navigator.navigateTo(RocketsFragmentDirections.actionShowWelcomeDialog()) }
+            .subscribe { navigator.navigate(To(RocketsFragmentDirections.actionShowWelcomeDialog())) }
     }
 
     val navigateToLaunchesCommand = command<Rocket> {
         rocketAction.select(it)
-            .subscribe { navigator.navigateTo(RocketsFragmentDirections.navigateToLaunches()) }
+            .subscribe { navigator.navigate(To(RocketsFragmentDirections.navigateToLaunches())) }
     }
 
     val filterInactiveRocketsCommand = command {
