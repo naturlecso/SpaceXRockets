@@ -2,17 +2,23 @@ package hu.naturlecso.spacexrockets.ui.binding
 
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import com.airbnb.epoxy.EpoxyRecyclerView
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import hu.naturlecso.spacexrockets.R
+import hu.naturlecso.spacexrockets.domain.Launch
+import hu.naturlecso.spacexrockets.domain.Rocket
+import hu.naturlecso.spacexrockets.launchChart
+import hu.naturlecso.spacexrockets.launchItem
+import hu.naturlecso.spacexrockets.launchRocketDescription
+import hu.naturlecso.spacexrockets.launchYear
+import hu.naturlecso.spacexrockets.ui.util.ChartEntries
 
 @BindingAdapter("entries")
-fun LineChart.bindEntries(entries: Map<Int, Int>?) {
-    if (entries == null) {
-        return
-    }
+fun LineChart.bindEntries(entries: ChartEntries?) {
+    entries ?: return
 
     val baseColor = ContextCompat.getColor(context, R.color.colorPrimary)
 
@@ -36,4 +42,50 @@ fun LineChart.bindEntries(entries: Map<Int, Int>?) {
                 data = this
                 invalidate()
             }
+}
+
+@BindingAdapter("items")
+fun EpoxyRecyclerView.bindItems(items: Pair<Rocket, List<Launch>>?) {
+    items ?: return
+
+    val rocket = items.first
+    val launches = items.second
+
+    withModels {
+
+        val groupedLaunches = launches.groupBy { it.year }
+
+        launchRocketDescription {
+            id("description")
+            description(rocket.description)
+        }
+
+        if (launches.isNotEmpty()) {
+
+            launchChart {
+                id("chart")
+                chartEntries(groupedLaunches
+                    .let { launchMap -> launchMap.mapValues { it.value.count() } }
+                )
+            }
+
+            groupedLaunches
+                .forEach {
+                    launchYear {
+                        id(it.key)
+                        year(it.key)
+                    }
+
+                    it.value.forEach {
+                        launchItem {
+                            id(it.hashCode())
+                            missionPatchUrl(it.missionPatchUrl)
+                            missionName(it.missionName)
+                            launchDate(it.date)
+                            successful(it.successful)
+                        }
+                    }
+                }
+        }
+    }
 }

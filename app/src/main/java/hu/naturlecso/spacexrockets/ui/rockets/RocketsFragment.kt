@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import hu.naturlecso.spacexrockets.R
 import hu.naturlecso.spacexrockets.databinding.FragmentRocketsBinding
-import kotlinx.android.synthetic.main.fragment_rockets.rocketList
+import kotlinx.android.synthetic.main.fragment_rockets.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RocketsFragment : Fragment() {
@@ -31,11 +31,8 @@ class RocketsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         rocketList.apply {
-            adapter = RocketAdapter()
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL).apply {
-                setDrawable(checkNotNull(ContextCompat.getDrawable(context, R.drawable.divider_list)))
+                setDrawable(checkNotNull(ContextCompat.getDrawable(checkNotNull(context), R.drawable.divider_list)))
             })
         }
 

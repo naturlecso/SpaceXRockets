@@ -31,8 +31,6 @@ class LaunchesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         launchList.apply {
-            adapter = LaunchAdapter()
-            layoutManager = LinearLayoutManager(activity)
             addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL).apply {
                 setDrawable(checkNotNull(ContextCompat.getDrawable(context, R.drawable.divider_list)))
             })

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <data>
+                <variable name="missionPatchUrl" type="String" />
+                <variable name="missionName" type="String" />
+                <variable name="launchDate" type="org.threeten.bp.LocalDate" />
+                <variable name="successful" type="Boolean" />
+
+        </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_normal">
+
+                <ImageView
+                        android:id="@+id/patch"
+                        android:layout_width="@dimen/launch_badge_size"
+                        android:layout_height="@dimen/launch_badge_size"
+                        android:importantForAccessibility="no"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        bind:url="@{missionPatchUrl}"
+                        bind:placeholder="@{@drawable/ic_rocket_placeholder}"
+                        bind:size="@{@dimen/launch_badge_size}"/>
+
+                <TextView
+                        android:id="@+id/name"
+                        android:layout_width="@dimen/none"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_normal"
+                        android:text="@{missionName}"
+                        android:textAppearance="?android:textAppearance"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        app:layout_constraintTop_toTopOf="@+id/patch"
+                        app:layout_constraintStart_toEndOf="@+id/patch"
+                        app:layout_constraintBottom_toTopOf="@+id/date"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintVertical_chainStyle="spread"
+                        tools:text="Mission 1"/>
+
+                <TextView
+                        android:id="@+id/date"
+                        android:layout_width="@dimen/none"
+                        android:layout_height="wrap_content"
+                        android:text="@{launchDate}"
+                        android:textAppearance="?android:textAppearance"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        app:layout_constraintTop_toBottomOf="@+id/name"
+                        app:layout_constraintStart_toStartOf="@+id/name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/successful"
+                        tools:text="2019. 03. 31."/>
+
+                <TextView
+                        android:id="@+id/successful"
+                        android:layout_width="@dimen/none"
+                        android:layout_height="wrap_content"
+                        android:text="@{successful ? @string/launches_successful : @string/launches_unsuccessful}"
+                        android:textAppearance="?android:textAppearance"
+                        android:textColor="@{successful ? @color/positive : @color/negative}"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        app:layout_constraintTop_toBottomOf="@+id/date"
+                        app:layout_constraintStart_toStartOf="@+id/name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/patch"
+                        tools:text="Successful"
+                        tools:textColor="@color/positive"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

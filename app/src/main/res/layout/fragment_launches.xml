@@ -9,11 +9,11 @@
             type="hu.naturlecso.spacexrockets.ui.launches.LaunchesViewModel"/>
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/launchList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         bind:hasFixedSize="@{false}"
-        bind:items="@{vm.launchListItems}"/>
+        bind:items="@{vm.rocketWithLaunches}"/>
 
 </layout>

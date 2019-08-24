@@ -4,6 +4,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingMethod
 import androidx.databinding.BindingMethods
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.epoxy.EpoxyRecyclerView
 import hu.naturlecso.spacexrockets.common.binding.Command
 import hu.naturlecso.spacexrockets.common.view.ItemActionProvider
 import hu.naturlecso.spacexrockets.common.view.BindableRecyclerViewAdapter

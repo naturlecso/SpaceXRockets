@@ -13,27 +13,11 @@ class LaunchesViewModel(
         rocketStore: RocketStore,
         launchStore: LaunchStore
 ) : ViewModel() {
-    val launchListItems = RxObservableField(Flowable.combineLatest(
+
+    val rocketWithLaunches = RxObservableField(Flowable.combineLatest(
         rocketStore.getSelected(),
         launchStore.getListBySelectedRocket(),
-        BiFunction<Rocket, List<Launch>, List<LaunchListItem>> { rocket, launches ->
-            mutableListOf<LaunchListItem>().apply {
-                add(LaunchListItem.RocketDescription(rocket))
-
-                if (launches.isNotEmpty()) {
-                    add(LaunchListItem.Chart(launches))
-
-                    addAll(launches.groupBy { it.year }
-                        .map { launchEntry ->
-                            launchEntry.value
-                                .map { LaunchListItem.LaunchItem(it) as LaunchListItem }
-                                .let { it.toMutableList()
-                                    .apply { this.add(0, LaunchListItem.Year(launchEntry.key)) }
-                                    .toList()
-                                } }
-                        .flatten()
-                    )
-                }
-            }.toList()
-        }))
+        BiFunction<Rocket, List<Launch>, Pair<Rocket, List<Launch>>> {
+        rocket, launches -> rocket to launches
+    }))
 }
