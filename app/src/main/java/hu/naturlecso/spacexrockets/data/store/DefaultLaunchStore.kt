@@ -2,7 +2,6 @@ package hu.naturlecso.spacexrockets.data.store
 
 import hu.naturlecso.spacexrockets.data.database.LaunchDao
 import hu.naturlecso.spacexrockets.data.database.LaunchDataModel
-import hu.naturlecso.spacexrockets.data.memory.SelectedRocketHolder
 import hu.naturlecso.spacexrockets.domain.Launch
 import hu.naturlecso.spacexrockets.domain.LaunchStore
 import io.reactivex.Flowable
@@ -11,12 +10,10 @@ import org.threeten.bp.Instant
 import org.threeten.bp.ZoneId
 
 class DefaultLaunchStore(
-    private val launchDao: LaunchDao,
-    private val rocketHolder: SelectedRocketHolder
+    private val launchDao: LaunchDao
 ): LaunchStore {
-    override fun getListBySelectedRocket(): Flowable<List<Launch>> = rocketHolder.get()
-        .map { it.id }
-        .switchMap { launchDao.getAllByRocket(it) }
+
+    override fun getListBySelectedRocket(rocketId: String): Flowable<List<Launch>> = launchDao.getAllByRocket(rocketId)
         .map { apiModelList -> apiModelList.map { mapDataModelToDomainModel(it) } }
         .subscribeOn(Schedulers.io())
 

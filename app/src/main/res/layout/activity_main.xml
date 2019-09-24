@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/navHostFragment"
-        android:name="hu.naturlecso.spacexrockets.common.navigation.CustomNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:navGraph="@navigation/spacex_graph"

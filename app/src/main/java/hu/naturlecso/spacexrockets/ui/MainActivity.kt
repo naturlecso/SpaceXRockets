@@ -35,10 +35,7 @@ class MainActivity : AppCompatActivity() {
             .subscribe {
                 when (it) {
                     is NavigationCommand.To -> navController.navigate(it.directions)
-                    is NavigationCommand.BackTo -> navController.popBackStack(it.destinationId, false)
                     is NavigationCommand.Back -> navController.navigateUp()
-                    is NavigationCommand.ToRoot -> navController.popBackStack(
-                        navController.graph.startDestination, false)
                 }
             }
     }

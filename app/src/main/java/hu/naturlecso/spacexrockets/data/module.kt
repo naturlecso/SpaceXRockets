@@ -7,7 +7,6 @@ import hu.naturlecso.spacexrockets.data.action.DefaultLaunchAction
 import hu.naturlecso.spacexrockets.data.action.DefaultRocketAction
 import hu.naturlecso.spacexrockets.data.api.SpacexApiService
 import hu.naturlecso.spacexrockets.data.database.SpacexDatabase
-import hu.naturlecso.spacexrockets.data.memory.SelectedRocketHolder
 import hu.naturlecso.spacexrockets.data.store.DefaultLaunchStore
 import hu.naturlecso.spacexrockets.data.store.DefaultRocketStore
 import hu.naturlecso.spacexrockets.domain.LaunchAction
@@ -55,14 +54,11 @@ val dataModule = module {
     single { get<SpacexDatabase>().rocketDao() }
     single { get<SpacexDatabase>().launchDao() }
 
-    // memory
-    single { SelectedRocketHolder() }
-
     // action
-    single<RocketAction> { DefaultRocketAction(get(), get(), get()) }
+    single<RocketAction> { DefaultRocketAction(get(), get()) }
     single<LaunchAction> { DefaultLaunchAction(get(), get()) }
 
     // store
-    single<RocketStore> { DefaultRocketStore(get(), get()) }
-    single<LaunchStore> { DefaultLaunchStore(get(), get()) }
+    single<RocketStore> { DefaultRocketStore(get()) }
+    single<LaunchStore> { DefaultLaunchStore(get()) }
 }

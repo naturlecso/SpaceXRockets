@@ -50,8 +50,7 @@ class RocketsViewModel(
     }
 
     val navigateToLaunchesCommand = command<Rocket> {
-        rocketAction.select(it)
-            .subscribe { navigator.navigate(To(RocketsFragmentDirections.navigateToLaunches())) }
+        navigator.navigate(To(RocketsFragmentDirections.navigateToLaunches(it.id)))
     }
 
     val filterInactiveRocketsCommand = command {

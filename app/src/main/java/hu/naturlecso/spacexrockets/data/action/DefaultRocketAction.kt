@@ -4,8 +4,6 @@ import hu.naturlecso.spacexrockets.data.api.RocketApiModel
 import hu.naturlecso.spacexrockets.data.api.SpacexApiService
 import hu.naturlecso.spacexrockets.data.database.RocketDao
 import hu.naturlecso.spacexrockets.data.database.RocketDataModel
-import hu.naturlecso.spacexrockets.data.memory.SelectedRocketHolder
-import hu.naturlecso.spacexrockets.domain.Rocket
 import hu.naturlecso.spacexrockets.domain.RocketAction
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
@@ -13,8 +11,7 @@ import timber.log.Timber
 
 class DefaultRocketAction(
     private val spacexApiService: SpacexApiService,
-    private val rocketDao: RocketDao,
-    private val rocketHolder: SelectedRocketHolder
+    private val rocketDao: RocketDao
 ): RocketAction {
 
     override fun refresh(): Completable = spacexApiService.allRockets()
@@ -22,9 +19,6 @@ class DefaultRocketAction(
         .flatMapCompletable { Completable.fromAction { rocketDao.replaceAll(it) } }
         .doOnError { Timber.e(it) }
         .onErrorComplete()
-        .subscribeOn(Schedulers.io())
-
-    override fun select(rocket: Rocket): Completable = rocketHolder.set(rocket)
         .subscribeOn(Schedulers.io())
 
     private fun mapApiModelToDataModel(apiModel: RocketApiModel): RocketDataModel = apiModel.let {

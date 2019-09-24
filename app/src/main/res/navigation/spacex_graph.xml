@@ -28,9 +28,13 @@
     <fragment
         android:id="@+id/launchesFragment"
         android:name="hu.naturlecso.spacexrockets.ui.launches.LaunchesFragment"
-        android:label="@string/launches_label"/>
+        android:label="@string/launches_label">
+        <argument
+                android:name="rocketId"
+                app:argType="string" />
+    </fragment>
 
-    <dialog-fragment
+    <dialog
         android:id="@+id/welcomeFragment"
         android:name="hu.naturlecso.spacexrockets.ui.welcome.WelcomeFragment"
         android:label="WelcomeFragment"/>

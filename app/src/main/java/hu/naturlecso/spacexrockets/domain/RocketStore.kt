@@ -4,5 +4,5 @@ import io.reactivex.Flowable
 
 interface RocketStore {
     fun getList(): Flowable<List<Rocket>>
-    fun getSelected(): Flowable<Rocket>
+    fun get(id: String): Flowable<Rocket>
 }
