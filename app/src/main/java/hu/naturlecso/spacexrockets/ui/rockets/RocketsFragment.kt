@@ -22,6 +22,7 @@ class RocketsFragment : Fragment() {
         val binding: FragmentRocketsBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_rockets, container, false)
 
+        binding.lifecycleOwner = this
         binding.vm = viewModel
 
         return binding.root

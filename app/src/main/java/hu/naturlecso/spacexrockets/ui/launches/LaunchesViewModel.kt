@@ -1,7 +1,7 @@
 package hu.naturlecso.spacexrockets.ui.launches
 
 import androidx.lifecycle.ViewModel
-import hu.naturlecso.spacexrockets.common.binding.RxObservableField
+import hu.naturlecso.spacexrockets.common.util.asLiveData
 import hu.naturlecso.spacexrockets.domain.Launch
 import hu.naturlecso.spacexrockets.domain.LaunchStore
 import hu.naturlecso.spacexrockets.domain.Rocket
@@ -21,13 +21,12 @@ class LaunchesViewModel(
         rocketIdProcessor.onNext(rocketId)
     }
 
-    val rocketWithLaunches = RxObservableField(
-        rocketIdProcessor.switchMap {
-            Flowable.combineLatest(
-                rocketStore.get(it),
-                launchStore.getListBySelectedRocket(it),
-                BiFunction<Rocket, List<Launch>, Pair<Rocket, List<Launch>>> {
-                        rocket, launches -> rocket to launches
-                })
-        })
+    val rocketWithLaunches = rocketIdProcessor.switchMap {
+        Flowable.combineLatest(
+            rocketStore.get(it),
+            launchStore.getListBySelectedRocket(it),
+            BiFunction<Rocket, List<Launch>, Pair<Rocket, List<Launch>>> {
+                    rocket, launches -> rocket to launches
+            })
+    }.asLiveData()
 }

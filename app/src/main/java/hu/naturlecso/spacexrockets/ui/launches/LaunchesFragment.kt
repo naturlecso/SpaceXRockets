@@ -25,6 +25,7 @@ class LaunchesFragment : Fragment() {
         val binding: FragmentLaunchesBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_launches, container, false)
 
+        binding.lifecycleOwner = this
         binding.vm = viewModel
         viewModel.setRocketId(args.rocketId)
 
