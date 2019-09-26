@@ -28,7 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 bind:items="@{vm.rockets}"
-                bind:itemClicked="@{vm.navigateToLaunchesCommand}"/>
+                bind:itemClicked="@{vm.navigateToLaunchesCommand}"
+                bind:divider="@{@drawable/divider_list}"
+                bind:showLastDivider="@{true}"/>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
