@@ -6,7 +6,7 @@
     <data>
         <variable
                 name="vm"
-                type="hu.naturlecso.spacexrockets.ui.rockets.RocketsViewModel"/>
+                type="hu.naturlecso.spacexrockets.features.rockets.RocketsViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

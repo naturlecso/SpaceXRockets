@@ -3,12 +3,12 @@ package hu.naturlecso.spacexrockets
 import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
 import hu.naturlecso.spacexrockets.data.dataModule
-import hu.naturlecso.spacexrockets.ui.uiModule
+import hu.naturlecso.spacexrockets.features.uiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
 
-class SpacexApplication  : Application() {
+class SpacexApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

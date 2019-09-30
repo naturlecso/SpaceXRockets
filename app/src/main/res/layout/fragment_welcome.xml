@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="hu.naturlecso.spacexrockets.ui.welcome.WelcomeViewModel"/>
+            type="hu.naturlecso.spacexrockets.features.welcome.WelcomeViewModel"/>
     </data>
 
     <LinearLayout

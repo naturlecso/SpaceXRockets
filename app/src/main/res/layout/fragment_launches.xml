@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="hu.naturlecso.spacexrockets.ui.launches.LaunchesViewModel"/>
+            type="hu.naturlecso.spacexrockets.features.launches.LaunchesViewModel"/>
     </data>
 
     <com.airbnb.epoxy.EpoxyRecyclerView

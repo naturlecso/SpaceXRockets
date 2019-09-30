@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/rocketsFragment"
-        android:name="hu.naturlecso.spacexrockets.ui.rockets.RocketsFragment"
+        android:name="hu.naturlecso.spacexrockets.features.rockets.RocketsFragment"
         android:label="@string/rockets_label">
         <action
             android:id="@+id/navigate_toLaunches"
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/launchesFragment"
-        android:name="hu.naturlecso.spacexrockets.ui.launches.LaunchesFragment"
+        android:name="hu.naturlecso.spacexrockets.features.launches.LaunchesFragment"
         android:label="@string/launches_label">
         <argument
                 android:name="rocketId"
@@ -36,6 +36,6 @@
 
     <dialog
         android:id="@+id/welcomeFragment"
-        android:name="hu.naturlecso.spacexrockets.ui.welcome.WelcomeFragment"
+        android:name="hu.naturlecso.spacexrockets.features.welcome.WelcomeFragment"
         android:label="WelcomeFragment"/>
 </navigation>
