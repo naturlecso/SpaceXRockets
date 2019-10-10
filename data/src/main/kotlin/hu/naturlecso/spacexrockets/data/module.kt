@@ -5,8 +5,12 @@ import androidx.room.Room
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import hu.naturlecso.spacexrockets.data.action.DefaultLaunchAction
 import hu.naturlecso.spacexrockets.data.action.DefaultRocketAction
+import hu.naturlecso.spacexrockets.data.mapper.RocketApiToDataMapper
 import hu.naturlecso.spacexrockets.data.api.SpacexApiService
 import hu.naturlecso.spacexrockets.data.cache.SpacexDatabase
+import hu.naturlecso.spacexrockets.data.mapper.LaunchApiToDataMapper
+import hu.naturlecso.spacexrockets.data.mapper.LaunchDataToDomainMapper
+import hu.naturlecso.spacexrockets.data.mapper.RocketDataToDomainMapper
 import hu.naturlecso.spacexrockets.data.store.DefaultLaunchStore
 import hu.naturlecso.spacexrockets.data.store.DefaultRocketStore
 import hu.naturlecso.spacexrockets.domain.action.LaunchAction
@@ -57,10 +61,16 @@ val dataModule = module {
     single { get<SpacexDatabase>().launchDao() }
 
     // action
-    single<RocketAction> { DefaultRocketAction(get(), get()) }
-    single<LaunchAction> { DefaultLaunchAction(get(), get()) }
+    single<RocketAction> { DefaultRocketAction(get(), get(), get()) }
+    single<LaunchAction> { DefaultLaunchAction(get(), get(), get()) }
 
     // store
-    single<RocketStore> { DefaultRocketStore(get()) }
-    single<LaunchStore> { DefaultLaunchStore(get()) }
+    single<RocketStore> { DefaultRocketStore(get(), get()) }
+    single<LaunchStore> { DefaultLaunchStore(get(), get()) }
+
+    // mapper
+    single { RocketApiToDataMapper() }
+    single { RocketDataToDomainMapper() }
+    single { LaunchApiToDataMapper() }
+    single { LaunchDataToDomainMapper() }
 }
